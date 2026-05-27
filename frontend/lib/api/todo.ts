@@ -5,13 +5,13 @@ import axiosInstance from "../axios";
 import { Todo } from "@/types";
 
 //Todo一覧を取得
-export const getTodos = async (): Primise<Todo[]> => {
+export const getTodos = async (): Promise<Todo[]> => {
     const response = await axiosInstance.get('/api/todos')
     return response.data
 }
 
 //Todoを作成
-export const createTodo = async (): Promise<Todo> => {
+export const createTodo = async (title:string): Promise<Todo> => {
     const response = await axiosInstance.post('/api/todos', { title })
     return response.data
 }
