@@ -44,7 +44,7 @@ class TodoController extends Controller
         // title は「もし送られてきたら（sometimes）」、空っぽはダメ（required）というルールに
         $request->validate([
             'title' => 'sometimes|required|max:255',
-            'is_active' => 'sometimes | boolean',
+            'is_active' => 'sometimes|boolean',
         ]);
 
         $todo = Todo::where('user_id', auth()->id())->findOrFail($id);
@@ -66,7 +66,7 @@ class TodoController extends Controller
 
         $todo->delete();
 
-        return response()->json();
+        return response()->json(null,204);
 
     }
 }
