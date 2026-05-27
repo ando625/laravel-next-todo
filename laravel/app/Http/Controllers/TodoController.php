@@ -29,6 +29,7 @@ class TodoController extends Controller
 
 
         $todo = Todo::create([
+            'user_id' => auth()->id(),
             'title' => $request->title,
             'is_active' => false,
         ]);
@@ -46,7 +47,7 @@ class TodoController extends Controller
             'is_active' => 'sometimes | boolean',
         ]);
 
-        $todo = Todo::findOrFail($id);
+        $todo = Todo::where('user_id', auth()->id())->findOrFail($id);
 
         //$request->onlyを使うと送られてきたデータのみを箱に詰めてくれる
         $updateDate = $request->only(['title', 'is_active']);
@@ -61,7 +62,7 @@ class TodoController extends Controller
     //Todo削除
     public function todoDelete($id)
     {
-        $todo = Todo::findOrFail($id);
+        $todo = Todo::where('user_id', auth()->id())->findOrFail($id);
 
         $todo->delete();
 
